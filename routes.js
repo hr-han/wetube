@@ -16,7 +16,7 @@ const VIDEOS = "/videos";
 const UPLOAD = "/upload";
 const UPDATE = "/update";
 const VIDEO_DETAIL = "/:id"
-const VIDEO_EDIT = "/:id/edit";
+const EDIT_VIDEO = "/:id/edit";
 const DELETE_VIDEO = "/:id/delete"
 
 const routes = {
@@ -45,7 +45,7 @@ const routes = {
             return VIDEO_DETAIL
         }
     },
-    vidoeEdit: VIDEO_EDIT,
+    editVideo: EDIT_VIDEO,
     deleteVideo: DELETE_VIDEO
 }
 

@@ -28,7 +28,7 @@ const routes = {
     users: USERS,
     userDetail: (id) => {
         if (id) {
-            return `${USERS}/${id}`
+            return `${USERS}/${id}`;
         } else {
             return USER_DETAIL
         }
@@ -40,7 +40,7 @@ const routes = {
     update: UPDATE,
     videoDetail: (id) => {
         if (id) {
-            return `${VIDEOS}/${id}`
+            return `${VIDEOS}/${id}?id=${id}`;
         } else {
             return VIDEO_DETAIL
         }

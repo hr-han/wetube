@@ -1,8 +1,12 @@
-import {videos} from "../db"
+//import {videos} from "../db"
+
+//import { getMovies } from "../db";
 import routes from "../routes";
 
 export const home = (req, res) => {
-    res.render("home", { pageTitle: "Home", videos });
+    console.log(getMovies());
+    //res.render("home", { pageTitle: "Home", videos: getMovies() });
+    res.render("home", { pageTitle: "Home", videos: [] });
 };
 
 export const search = (req, res) => {
@@ -31,8 +35,10 @@ export const video = (req, res) =>
          res.render("videos", { pageTitle: "Videos" });
 
 
-export const videoDetail = (req, res) =>
+export const videoDetail = (req, res) => {
+        console.log(req);
          res.render("videoDetail", { pageTitle: "Video Detail" });
+        }
 
 export const editVideo = (req, res) =>
          res.render("editVideo", { pageTitle: "Edit Video" });

@@ -40,7 +40,7 @@ const routes = {
     update: UPDATE,
     videoDetail: (id) => {
         if (id) {
-            return `${VIDEOS}/${id}?id=${id}`;
+            return `${VIDEOS}/${id}`;
         } else {
             return VIDEO_DETAIL
         }

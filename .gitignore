@@ -112,3 +112,5 @@ dist
 package-lock.json
 .vscode/settings.json
 uploads/videos/
+static/main.js
+static/styles.css

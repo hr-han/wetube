@@ -12,6 +12,7 @@ export const postJoin = async (req, res, next) => {
         } = req;
     
     if (password !== password2) {
+        req.flash('error', 'Password dont match!')
         res.status(400);
     } else {
         try {
@@ -109,7 +110,10 @@ export const getLogin = (req, res) => res.render("login", { pageTitle: "Log In" 
 
 export const postLogin = passport.authenticate("local", {
     failureRedirect: routes.login,
-    successRedirect: routes.home
+    successRedirect: routes.home,
+    successFlash: "WELCOME",
+    failureFlash:"Can't Login"
+
 });
 
 export const logout = (req, res) => {

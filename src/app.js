@@ -6,6 +6,7 @@ import passport from "passport";
 import mongoose from "mongoose";
 import session from "express-session";
 import path from "path";
+import flash from "express-flash";
 import MongoStore from "connect-mongo";
 import cookieParser from "cookie-parser";
 import { localMiddleward } from "./middlewares";
@@ -43,6 +44,8 @@ app.use(
     })
   })
 );
+
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session())
 

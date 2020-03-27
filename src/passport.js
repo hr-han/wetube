@@ -15,7 +15,7 @@ passport.use(
     {
       clientID: process.env.GH_ID,
       clientSecret: process.env.GH_SECRET,
-      callbackURL: `http://localhost:4000${routes.githubCallback}`,
+      callbackURL: `${process.env.PRODUCTION? process.env.URL_PROD: process.env.URL}${routes.githubCallback}`,
       scope: "user:email"
     },
     githubLoginCallback

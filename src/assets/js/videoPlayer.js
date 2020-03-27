@@ -11,7 +11,7 @@ const volumeRange = document.getElementById("jsVolume");
 
 const registerView = () => {
     const videoId = window.location.href.split("/videos/")[1];
-    fetch(`http://localhost:4000/api/${videoId}/view`, { method: "POST" });
+    fetch(`${process.env.PRODUCTION? process.env.URL_PROD: process.env.URL}/api/${videoId}/view`, { method: "POST" });
 }
 
 function handlePlayClick() {

@@ -48,9 +48,9 @@
     "build:server": "babel src --out-dir build --ignore 'src/assets','src/static','src/webpack.config.js'",
     "copyAll": "cp -R src/static build && cp -R src/views build",
     "build": "npm run build:server && npm run build:assets && npm run copyAll",
-    "prebuild": "npm run build",
+    "prestart": "npm run build",
     "tunnel": "lt --port 4000",
-    "start": "PRODUCTION=true node build/init.j"
+    "start": "PRODUCTION=true node build/init.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",

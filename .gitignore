@@ -114,3 +114,4 @@ package-lock.json
 uploads/videos/
 static/main.js
 static/styles.css
+build

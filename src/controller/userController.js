@@ -124,7 +124,7 @@ export const postLogin = passport.authenticate("local", {
 });
 
 export const logout = (req, res) => {
-    req.flash('info', "Logged out, see type later!")
+    req.flash('info', "Logged out, see you later!")
     req.logout();
     res.redirect(routes.home)
 }

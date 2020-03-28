@@ -1,5 +1,6 @@
 import routes from "../routes";
 import Video from "../models/Video"
+import User from "../models/User";
 import Comment from "../models/Comment";
 
 export const home = async (req, res) => {
@@ -152,25 +153,63 @@ export const postAddComment = async (req, res) => {
     // user
   } = req;
   
-  console.log(id);
-  console.log(comment);
+  //console.log(id);
+  //console.log(comment);
 
   try {
     const video = await Video.findById(id);
     const newComment = await Comment.create({
         text: comment
-        // creator: user.id
     })
-
-    console.log(newComment);
     
     video.comments.push(newComment.id);
     video.save();
+
+    console.log(req.user.id);
+    
+
+    const user = await User.findById(req.user.id);
+    console.log(user);
+    
+    user.comments.push(newComment.id);
+    user.save();
+
     res.status(200);
+    res.json({ commentId: newComment.id });
+    //return { id: "a1234" };
   } catch (error) {
+    console.log(error);
+    
     res.status(400);
   } finally {
     res.end();
   }
 };
+
+export const postDeleteComment = async (req, res) => {
+
+    const {
+      params: { id },
+      body: {videoId}
+    } = req;
+
+    console.log(id, videoId);
+
+
+    try {
+      //TODO
+      // user, video, comment 에서 다 삭제
+      await Comment.findByIdAndDelete(id);
+      const video = await Video.findById(videoId);
+      video.comments.pull(id);
+      video.save();
+      const user = await User.findById(req.user.id);
+      user.comments.pull(id);
+      user.save();
+    } catch (error) {
+      res.status(400);
+    } finally {
+      res.end();
+    }
+  };
          

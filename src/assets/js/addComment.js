@@ -1,4 +1,5 @@
 import axios from "axios";
+import { handleDelete } from "./delComment";
 
 const addCommentForm = document.getElementById("jsAddComment");
 const commentList = document.getElementById("jsCommentList");
@@ -9,35 +10,58 @@ const increaseNumber =() => {
     commentNumber.innerHTML = parseInt(commentNumber.innerHTML,10) + 1;
 }
 
-const addComment = (comment) => {
+
+const addComment = (comment, newId) => {
     const li = document.createElement("li");
     const span = document.createElement("span");
+    const delSpan = document.createElement("span");
+    const hidden = document.createElement("input");
+    hidden.type="hidden"
+    hidden.value = newId;
+    hidden.id = "jsDelHidden";
+    //const a = document.createElement("a");
+    // hidden 추가
+    delSpan.classList.add("del__comment");
+    delSpan.id = "jsDelComment";
+    
+    delSpan.innerHTML = " ✖️";
+    
     span.innerHTML = comment;
+    delSpan.addEventListener("click", handleDelete);
+    delSpan.appendChild(hidden);
     li.appendChild(span);
+    li.appendChild(delSpan);
+    //li.appendChild(a);
     commentList.prepend(li);
     increaseNumber();
 }
 
 
-
 const sendComment = async comment => {
      const videoId = window.location.href.split("/videos/")[1];
-     // retrun 없는 void 같은 것? 
-     //fetch(`http://localhost:4000/api/${videoId}/view`, { method: "POST" });
     
-    console.log(videoId);
+    console.log(window.location.href);
 
-    const response = await axios({
-        url: `/api/${videoId}/comment`,
-        method: "POST",
-        data: {
-            comment
+    await axios({
+      url: `/api/${videoId}/comment`,
+      method: "POST",
+      data: {
+        comment
+      }
+    }).then(async res => {
+      return await res;
+    }).then(res2 => {
+        console.log(res2);
+
+        //console.log(response);
+        if (res2.status === 200) {
+          //console.log(comment);
+          const {data :{commentId}} = res2
+
+          addComment(comment, commentId);
         }
     });
-    console.log(response);
-    if (response.status === 200) {
-      addComment(comment);
-    }
+
 }
     
 

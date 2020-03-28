@@ -26,7 +26,7 @@ block content
                     |  comment
             else
                 span.video__comment-number
-                    apan#jsCommentNumber=video.comments.length
+                    span#jsCommentNumber=video.comments.length
                     |  comments
             form.add__comment#jsAddComment
                 input(type="text", placeholder="Add a comment")
@@ -34,3 +34,7 @@ block content
                 each comment in video.comments.reverse()
                     li
                         span=comment.text
+                        if loggedUser && loggedUser.id == video.creator.id 
+                            span.del__comment#jsDelComment
+                                |    ✖️
+                                input(type="hidden", value=comment.id)#jsDelHidden

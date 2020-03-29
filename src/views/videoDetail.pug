@@ -28,14 +28,14 @@ block content
                 span.video__comment-number
                     span#jsCommentNumber=video.comments.length
                     |  comments
-                form.add__comment#jsAddComment
-                    if loggedUser
-                        input(type="text", placeholder="Add a comment")
-                ul.video__comments-list#jsCommentList
-                    each comment in video.comments.reverse()
-                        li
-                            span=comment.text
-                            if loggedUser && loggedUser.id == video.creator.id 
-                                span.del__comment#jsDelComment
-                                    |    ✖️
-                                    input(type="hidden", value=comment.id)#jsDelHidden
+            form.add__comment#jsAddComment
+                if loggedUser
+                    input(type="text", placeholder="Add a comment")
+            ul.video__comments-list#jsCommentList
+                each comment in video.comments.reverse()
+                    li
+                        span=comment.text
+                        if loggedUser && loggedUser.id == video.creator.id 
+                            span.del__comment#jsDelComment
+                                |    ✖️
+                                input(type="hidden", value=comment.id)#jsDelHidden
